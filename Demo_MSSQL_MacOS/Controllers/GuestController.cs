@@ -20,6 +20,7 @@ public class GuestController : ControllerBase
     public  ActionResult GetAll ()
     {
         var guests = this.guestService.RetrieveAllGuests();
+        
         return this.Ok(guests);
     }
 
@@ -27,6 +28,7 @@ public class GuestController : ControllerBase
     public async ValueTask<ActionResult<Guest>> CreateGuest(Guest guest)
     {
         var res = await this.guestService.AddGuest(guest);
+        
         return Ok(res);
     }
 }
