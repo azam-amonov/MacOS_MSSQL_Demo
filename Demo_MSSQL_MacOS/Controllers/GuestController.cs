@@ -17,7 +17,7 @@ public class GuestController : ControllerBase
     }
 
     [HttpGet]
-    public  ActionResult GetAll ()
+    public  ActionResult GetAllGuests ()
     {
         var guests = this.guestService.RetrieveAllGuests();
         
@@ -25,10 +25,34 @@ public class GuestController : ControllerBase
     }
 
     [HttpPost]
-    public async ValueTask<ActionResult<Guest>> CreateGuest(Guest guest)
+    public async ValueTask<ActionResult<Guest>> PostGuestAsync(Guest guest)
     {
         var res = await this.guestService.AddGuest(guest);
         
         return Ok(res);
+    }
+
+    [HttpGet("guestId")]
+    public async ValueTask<ActionResult<Guest>> GetGuestByIdAsync(Guid guestId)
+    {
+        var guest = await this.guestService.RetrieveGuestByIdAsync(guestId);
+        
+        return Ok(guest);
+    }
+
+    [HttpPut]
+    public async ValueTask<ActionResult<Guest>> PutGuestAsync(Guest guest)
+    {
+        var result = await this.guestService.ModifierGuestAsync(guest);
+        
+        return Ok(result);
+    }
+
+    [HttpDelete]
+    public async ValueTask<ActionResult<Guest>> DeleteGuestAsync(Guest guest)
+    {
+        var result = await this.guestService.RemoveGuestAsync(guest);
+        
+        return Ok(result);
     }
 }
