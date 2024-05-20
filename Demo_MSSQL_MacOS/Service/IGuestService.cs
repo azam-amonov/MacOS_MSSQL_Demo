@@ -5,5 +5,8 @@ namespace Demo_MSSQL_MacOS.Service;
 public interface IGuestService
 {
     ValueTask<Guest> AddGuest(Guest guest);
-    public IQueryable<Guest> RetrieveAllGuests();
+    IQueryable<Guest> RetrieveAllGuests();
+    ValueTask<Guest> RetrieveGuestByIdAsync(Guid id);
+    ValueTask<Guest> ModifierGuestAsync(Guest guest);
+    ValueTask<Guest> RemoveGuestAsync(Guest guest);
 }

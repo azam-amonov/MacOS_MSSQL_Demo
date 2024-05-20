@@ -12,13 +12,18 @@ public class GuestService : IGuestService
         this.storageBroker = storageBroker;
     }
 
-    public async ValueTask<Guest> AddGuest(Guest guest)
-    {
-        return await this.storageBroker.InsertGuestAsync(guest);
-    }
+    public async ValueTask<Guest> AddGuest(Guest guest) =>
+        await this.storageBroker.InsertGuestAsync(guest);
 
-    public IQueryable<Guest> RetrieveAllGuests()
-    {
-        return this.storageBroker.SelectAllGuests();
-    }
+    public IQueryable<Guest> RetrieveAllGuests() =>
+        this.storageBroker.SelectAllGuests();
+
+    public async ValueTask<Guest> RetrieveGuestByIdAsync(Guid id) =>
+        await this.storageBroker.SelectGuestAsync(id);
+
+    public async ValueTask<Guest> ModifierGuestAsync(Guest guest) =>
+        await this.storageBroker.UpdateGuestAsync(guest);
+
+    public async ValueTask<Guest> RemoveGuestAsync(Guest guest) =>
+        await this.storageBroker.DeleteGuestAsync(guest);
 }
